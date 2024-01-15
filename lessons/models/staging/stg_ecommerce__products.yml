@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: stg_ecommerce__products
+    description: "Details on the products"
+    columns:
+      - name: product_id
+        data_type: int64
+        description: "Unique identifier for a product"
+        tests:
+          - not_null
+          - unique
+
+      - name: cost
+        data_type: float64
+        description: "How much the product costs to produce"
+        tests:
+          - not_null
+
+      - name: category
+        data_type: string
+        description: "Category the product is classified under"
+
+      - name: name
+        data_type: string
+        description: "The name of the product"
+
+      - name: brand
+        data_type: string
+        description: "Brand name the product is under"
+
+      - name: retail_price
+        data_type: float64
+        description: "The list price of the product"
+        tests:
+          - not_null
+
+      - name: department
+        data_type: string
+        description: "Whether the item is in Menswear or Womenswear"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - "Men"
+                - "Women"
+              quote: true
+
+      - name: sku
+        data_type: string
+        description: ""
+
+      - name: distribution_center_id
+        data_type: int64
+        description: ""

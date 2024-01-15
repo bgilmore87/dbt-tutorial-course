@@ -50,7 +50,7 @@ models:
     marts:
       # In reality this would only be useful if we had subfolders within marts/staging/intermediate
       # but this is an illustration how you would apply a group to a folder
-      +group: sales
+      +group: null
 
 tests:
   answers:
