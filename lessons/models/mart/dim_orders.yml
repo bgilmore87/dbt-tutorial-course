@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: dim_orders
+    description: "Table of order level information"
+    # Set this model to be a part of the sales group we define above
+    # We don't need to define the group and the model in the same yml file!
+    columns:
+      - name: order_id
+        data_type: int64
+        description: ""
+        tests:
+          # Generic test that we define in tests/generic/test_primary_key.sql
+          # Takes arguments for model & column_name, both of which are automatically passed to it
+          - not_null
+          - unique:
+              severity: error
+          - relationships:
+              to: ref('stg_ecommerce__orders')
+              field: order_id
+              severity: error
+
+      - name: order_created_at
+        data_type: timestamp
+        description: "When the order was created"
+
+      - name: order_shipped_at
+        data_type: timestamp
+        description: ""
+
+      - name: order_delivered_at
+        data_type: timestamp
+        description: "When the order was delivered"
+
+      - name: order_returned_at
+        data_type: timestamp
+        description: "When the order was returned"
+
+      - name: order_status
+        data_type: string
+        description: ""
+
+      - name: num_of_item
+        data_type: int64
+        description: "Number of items in the order"
+
+      - name: total_sale_price
+        data_type: float64
+        description: "Sum of item_sale_price for the whole order"
+        tests:
+          - not_null
+
+      - name: total_product_cost
+        data_type: float64
+        description: "Sum of product_cost for the whole order"
+        tests:
+          - not_null
+
+      - name: total_profit
+        data_type: float64
+        description: "Sum of (item_sale_price - product_cost) for the whole order"
+        tests:
+          - not_null
+
+      - name: total_discount
+        data_type: float64
+        description: "Sum of (product_retail_price - item_sale_price) for the whole order"
+        tests:
+          - not_null
