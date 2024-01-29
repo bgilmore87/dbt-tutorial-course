@@ -37,3 +37,8 @@ models:
     +persist_docs:
       relation: true
       columns: true
+    #Table is set to delete after 168 hours (7 days) from creation
+    +hours_to_expiration: 168
+tests:
+  lessons:
+    +severity: warn
